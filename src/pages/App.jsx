@@ -4,11 +4,9 @@ import "./App.css";
 import TodoList from "../components/TodoList";
 const App = () => {
   return (
-    <div className="App">
+    <div className="container flex flex-col bg-gray-100">
       <AddTodo />
-      <div className="TodoList">
-        <TodoList />
-      </div>
+      <TodoList />
     </div>
   );
 };

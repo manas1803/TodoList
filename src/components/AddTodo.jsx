@@ -10,7 +10,7 @@ const AddTodo = () => {
     setTask("");
   };
   return (
-    <div>
+    <div className="rounded-sm">
       <input
         type="text"
         value={task}
