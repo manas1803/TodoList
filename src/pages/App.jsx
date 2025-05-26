@@ -1,13 +1,15 @@
 import AddTodo from "../components/AddTodo";
+import TodoList from "../components/TodoList";
+import { Container } from "@mui/material";
 
 import "./App.css";
-import TodoList from "../components/TodoList";
+
 const App = () => {
   return (
-    <div className="container flex flex-col bg-gray-100">
+    <Container fixed>
       <AddTodo />
       <TodoList />
-    </div>
+    </Container>
   );
 };
 

@@ -1,17 +1,23 @@
 import React, { useContext, useState } from "react";
 import { TodoContext } from "../context/TodoContext";
+import {
+  Box,
+  Container,
+  IconButton,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
+import { Delete, Edit, Save, TaskAlt } from "@mui/icons-material";
 
-const Todo = ({ taskId, taskName, isComplete, isEditable })=> {
+const Todo = ({ taskId, taskName, isComplete, isEditable }) => {
   const [editedTask, setEditedTask] = useState(taskName);
   const { editTodos, removeTodos, completeTodo } = useContext(TodoContext);
   return (
-    <div
-      key={taskId}
+    <Container
       className="todoItem"
       task-complete={isComplete ? "complete" : ""}
     >
-      <label className="radio-option">
-        <input
+      {/* <input
           type="radio"
           name="task"
           value={taskId}
@@ -23,17 +29,51 @@ const Todo = ({ taskId, taskName, isComplete, isEditable })=> {
           disabled={!isEditable || isComplete}
           value={editedTask}
           onChange={(e) => setEditedTask(e.currentTarget.value)}
-        />
-      </label>
-      <button
-        onClick={() => editTodos(taskId, editedTask, isEditable)}
-        disabled={isComplete}
+        /> */}
+      <Box
+        sx={{
+          width: "100%",
+          p: 2,
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+        }}
       >
-        {isEditable ? "Save" : "Edit"}{" "}
-      </button>
-      <button onClick={() => removeTodos(taskId)}>Delete</button>
-    </div>
+        <label className="radio-option">
+          <TextField
+            fullWidth
+            variant="outlined"
+            value={editedTask}
+            onChange={(e) => setEditedTask(e.currentTarget.value)}
+            disabled={!isEditable || isComplete}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconButton
+                    onClick={() => completeTodo(taskId)}
+                    edge="end"
+                    disabled={isComplete}
+                  >
+                    <TaskAlt />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </label>
+        <IconButton
+          onClick={() => editTodos(taskId, editedTask, isEditable)}
+          edge="end"
+          disabled={isComplete}
+        >
+          {isEditable ? <Save /> : <Edit />}
+        </IconButton>
+        <IconButton onClick={() => removeTodos(taskId)}>
+          <Delete />
+        </IconButton>
+      </Box>
+    </Container>
   );
-}
+};
 
 export default Todo;
