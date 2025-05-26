@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { TodoContext } from "./context/TodoContext";
+import { TodoContext } from "../context/TodoContext";
 
-function Todo({ taskId, taskName, isComplete, isEditable }) {
+const Todo = ({ taskId, taskName, isComplete, isEditable })=> {
   const [editedTask, setEditedTask] = useState(taskName);
   const { editTodos, removeTodos, completeTodo } = useContext(TodoContext);
   return (
