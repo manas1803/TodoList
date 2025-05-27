@@ -17,26 +17,14 @@ const Todo = ({ taskId, taskName, isComplete, isEditable }) => {
       className="todoItem"
       task-complete={isComplete ? "complete" : ""}
     >
-      {/* <input
-          type="radio"
-          name="task"
-          value={taskId}
-          onChange={() => completeTodo(taskId)}
-          disabled={isComplete}
-        />
-        <input
-          type="text"
-          disabled={!isEditable || isComplete}
-          value={editedTask}
-          onChange={(e) => setEditedTask(e.currentTarget.value)}
-        /> */}
       <Box
         sx={{
           width: "100%",
           p: 2,
-          display: "flex",
+          display: "grid",
           alignItems: "center",
           gap: 1,
+          gridTemplateColumns: "16fr 1fr 1fr",
         }}
       >
         <label className="radio-option">
