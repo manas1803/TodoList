@@ -8,11 +8,13 @@ import {
   TextField,
 } from "@mui/material";
 import { Delete,TaskAlt } from "@mui/icons-material";
+import EditTodo from "./EditTodo";
 
-const Todo = ({ taskId, taskName, isComplete, isEditable }) => {
-  const [editedTask, setEditedTask] = useState(taskName);
+const Todo = ({ taskId, taskName, isComplete }) => {
+  const [isEdit, setIsEdit] = useState(false);
   const { removeTodos, completeTodo } = useContext(TodoContext);
   return (
+    <>
     <Container
       className="todoItem"
       task-complete={isComplete ? "complete" : ""}
@@ -31,8 +33,8 @@ const Todo = ({ taskId, taskName, isComplete, isEditable }) => {
           <TextField
             fullWidth
             variant="outlined"
-            value={editedTask}
-            onChange={(e) => setEditedTask(e.currentTarget.value)}
+            value={taskName}
+            onClick={()=>setIsEdit(prev=>!prev)}
             InputProps={{
               readOnly: true,
               sx: {
@@ -59,6 +61,8 @@ const Todo = ({ taskId, taskName, isComplete, isEditable }) => {
         </IconButton>
       </Box>
     </Container>
+    <EditTodo todo={taskName} open={isEdit} setOpen={setIsEdit}/>
+    </>
   );
 };
 
