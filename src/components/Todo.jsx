@@ -7,11 +7,11 @@ import {
   InputAdornment,
   TextField,
 } from "@mui/material";
-import { Delete, Edit, Save, TaskAlt } from "@mui/icons-material";
+import { Delete,TaskAlt } from "@mui/icons-material";
 
 const Todo = ({ taskId, taskName, isComplete, isEditable }) => {
   const [editedTask, setEditedTask] = useState(taskName);
-  const { editTodos, removeTodos, completeTodo } = useContext(TodoContext);
+  const { removeTodos, completeTodo } = useContext(TodoContext);
   return (
     <Container
       className="todoItem"
@@ -24,7 +24,7 @@ const Todo = ({ taskId, taskName, isComplete, isEditable }) => {
           display: "grid",
           alignItems: "center",
           gap: 1,
-          gridTemplateColumns: "16fr 1fr 1fr",
+          gridTemplateColumns: "19fr 1fr",
         }}
       >
         <label className="radio-option">
@@ -33,8 +33,13 @@ const Todo = ({ taskId, taskName, isComplete, isEditable }) => {
             variant="outlined"
             value={editedTask}
             onChange={(e) => setEditedTask(e.currentTarget.value)}
-            disabled={!isEditable || isComplete}
             InputProps={{
+              readOnly: true,
+              sx: {
+                "& input": {
+                  cursor: "pointer",
+                },
+              },
               startAdornment: (
                 <InputAdornment position="start">
                   <IconButton
@@ -49,13 +54,6 @@ const Todo = ({ taskId, taskName, isComplete, isEditable }) => {
             }}
           />
         </label>
-        <IconButton
-          onClick={() => editTodos(taskId, editedTask, isEditable)}
-          edge="end"
-          disabled={isComplete}
-        >
-          {isEditable ? <Save /> : <Edit />}
-        </IconButton>
         <IconButton onClick={() => removeTodos(taskId)}>
           <Delete />
         </IconButton>
